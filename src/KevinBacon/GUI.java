@@ -12,10 +12,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.EmptyStackException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -34,7 +31,6 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() throws IOException {
         this.setUndecorated(true);
-        this.setAlwaysOnTop(true);
         this.setResizable(false);
         this.setVisible(true);
         initComponents();
@@ -56,6 +52,7 @@ public class GUI extends javax.swing.JFrame {
         menu1.setVisible(false);
         drawPic();
         leer(new File("./default.txt"));
+        //
     }
 
     /**
@@ -68,7 +65,7 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         menu = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        b_ingresar = new javax.swing.JButton();
         menu1 = new javax.swing.JPanel();
         label = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -84,13 +81,13 @@ public class GUI extends javax.swing.JFrame {
 
         menu.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar-.png"))); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        b_ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar-.png"))); // NOI18N
+        b_ingresar.setContentAreaFilled(false);
+        b_ingresar.setFocusable(false);
+        b_ingresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
+        b_ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                b_ingresarActionPerformed(evt);
             }
         });
 
@@ -100,14 +97,14 @@ public class GUI extends javax.swing.JFrame {
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(b_ingresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(b_ingresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,7 +172,7 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void b_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ingresarActionPerformed
         try {
             menu.setVisible(false);
             menu1.setVisible(true);
@@ -186,7 +183,7 @@ public class GUI extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_b_ingresarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         leer(cargar());
@@ -220,6 +217,7 @@ public class GUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -279,12 +277,11 @@ public class GUI extends javax.swing.JFrame {
         Image img;
         img = Toolkit.getDefaultToolkit().createImage(foto.getSource()).getScaledInstance(150, 150, 0);
         label.setIcon(new ImageIcon(img));
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton b_ingresar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -298,3 +295,5 @@ public class GUI extends javax.swing.JFrame {
     int x;
     int y;
 }
+
+
