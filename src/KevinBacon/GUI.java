@@ -34,6 +34,10 @@ public class GUI extends javax.swing.JFrame {
         this.setResizable(false);
         this.setVisible(true);
         initComponents();
+        label.setIcon(new ImageIcon("./src/Imagenes/star.png"));
+        b_ingresar.setIcon(new ImageIcon("./src/Imagenes/entrar-.png"));
+        b_ingresar.setRolloverIcon(new ImageIcon("./src/Imagenes/entrar.png"));
+        b_ingresar.setVisible(true);
         //Pantalla Completa
         Toolkit tk = Toolkit.getDefaultToolkit();
         x = (int) tk.getScreenSize().getWidth();
@@ -64,56 +68,23 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menu = new javax.swing.JPanel();
-        b_ingresar = new javax.swing.JButton();
         menu1 = new javax.swing.JPanel();
         label = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        menu = new javax.swing.JPanel();
+        b_ingresar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        menu.setBackground(new java.awt.Color(255, 255, 255));
-
-        b_ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar-.png"))); // NOI18N
-        b_ingresar.setContentAreaFilled(false);
-        b_ingresar.setFocusable(false);
-        b_ingresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/entrar.png"))); // NOI18N
-        b_ingresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_ingresarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
-        menu.setLayout(menuLayout);
-        menuLayout.setHorizontalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(b_ingresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        menuLayout.setVerticalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(b_ingresar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(menu);
-        menu.setBounds(20, 20, 230, 220);
-
         menu1.setBackground(new java.awt.Color(255, 255, 255));
-
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/star.png"))); // NOI18N
 
         jButton2.setText("jButton2");
 
@@ -132,26 +103,50 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menu1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(menu1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
-                    .addComponent(label))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(menu1Layout.createSequentialGroup()
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 86, Short.MAX_VALUE))
         );
 
         getContentPane().add(menu1);
         menu1.setBounds(260, 20, 330, 220);
+
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+
+        b_ingresar.setContentAreaFilled(false);
+        b_ingresar.setFocusable(false);
+        b_ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_ingresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(b_ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(b_ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(menu);
+        menu.setBounds(20, 20, 230, 220);
         getContentPane().add(Fondo);
         Fondo.setBounds(10, 570, 0, 60);
 
@@ -164,6 +159,15 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        jMenuItem2.setText("Salir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -188,6 +192,10 @@ public class GUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         leer(cargar());
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,6 +296,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel label;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menu1;
