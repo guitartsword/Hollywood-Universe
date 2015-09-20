@@ -5,6 +5,9 @@
  */
 package KevinBacon;
 
+import com.timboudreau.vl.jung.GraphSelection;
+import com.timboudreau.vl.jung.JungScene;
+
 /**
  *
  * @author Isaias
