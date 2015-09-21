@@ -57,7 +57,7 @@ public class GUI extends javax.swing.JFrame {
         //
         menu1.setVisible(false);
         g = new SparseMultigraph<>();
-        pila= new Stack();
+        historial= new Stack();
         leer(new File("./default.txt"));
         System.out.println(g.toString());
         //
@@ -291,21 +291,25 @@ public class GUI extends javax.swing.JFrame {
             //Creacion
             if (temp1 == null && temp2 == null) {
                 temp1 = new Actor((Actor1[0] + " " + Actor1[1]), Integer.parseInt(Actor1[2]), Actor1[3]);
+                historial.push("Se leyo de un Archvio y se creo el Actor "+temp1.toString());
                 temp2 = new Actor((Actor2[0] + " " + Actor2[1]), Integer.parseInt(Actor2[2]), Actor2[3]);
+                historial.push("Se leyo de un Archvio y se creo el Actor "+temp2.toString());
                 if(Actor1.length>4){
                     for (int i = 4; i < Actor1.length; i++) {
                         String[] pelicula=Actor1[i].split("-");
-                        System.out.println("Agregue peli "+pelicula[0]);
+                        historial.push("Se leyo de un Archvio y se agrego la pelicula "+pelicula[0]+" al actor "+temp1.toString());
                         temp1.addParticapado(new Pelicula(pelicula[0],Integer.parseInt(pelicula[1]),pelicula[2]));
                     }
                 }
                 if(Actor2.length>4){
                     for (int i = 4; i < Actor2.length; i++) {
                         String[] pelicula=Actor2[i].split("-");
-                        System.out.println("Agregue peli "+pelicula[0]);
+                        historial.push("Se leyo de un Archvio y se agrego la pelicula "+pelicula[0]+" al actor "+temp2.toString());
                         temp2.addParticapado(new Pelicula(pelicula[0],Integer.parseInt(pelicula[1]),pelicula[2]));
                     }
                 }
+                
+                
                 g.addVertex(temp1);
                 g.addVertex(temp2);
             }else if (temp1==null){
@@ -313,20 +317,25 @@ public class GUI extends javax.swing.JFrame {
                 if(Actor1.length>4){
                     for (int i = 4; i < Actor1.length; i++) {
                         String[] pelicula=Actor1[i].split("-");
+                        historial.push("Se leyo de un Archvio y se agrego la pelicula "+pelicula[0]+" al actor "+temp1.toString());
                         temp1.addParticapado(new Pelicula(pelicula[0],Integer.parseInt(pelicula[1]),pelicula[2]));
                     }
                 }
+                historial.push("Se leyo de un Archvio y se creo el Actor "+temp1.toString());
                 g.addVertex(temp1);
             }else if(temp2==null){
                 temp2 = new Actor((Actor2[0] + " " + Actor2[1]), Integer.parseInt(Actor2[2]), Actor2[3]);
                 if(Actor2.length>4){
                     for (int i = 4; i < Actor2.length; i++) {
                         String[] pelicula=Actor2[i].split("-");
+                        historial.push("Se leyo de un Archvio y se agrego la pelicula "+pelicula[0]+" al actor "+temp2.toString());
                         temp2.addParticapado(new Pelicula(pelicula[0],Integer.parseInt(pelicula[1]),pelicula[2]));
                     }
                 }
+                historial.push("Se leyo de un Archvio y se creo el Actor "+temp2.toString());
                 g.addVertex(temp2);
             }
+            
             if(!temp1.getNombreCompleto().equals(temp2.getNombreCompleto())){
                 boolean pasar=true;
                 for (Relaciones temp: g.getEdges()) {
@@ -335,6 +344,7 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
                 if(pasar){
+                    historial.push("Se leyo de un Archvio y se agrego la relacion "+relacion+" entre "+temp1.toString()+" y "+temp2.toString());
                     g.addEdge(new Relaciones(relacion,temp1.getNombreCompleto(),temp2.getNombreCompleto()), temp1, temp2);
                 }  
             }
@@ -358,5 +368,5 @@ public class GUI extends javax.swing.JFrame {
     int x;
     int y;
     Graph<Actor, Relaciones> g;
-    Stack pila;
+    Stack historial;
 }
