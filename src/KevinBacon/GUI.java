@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -51,7 +53,8 @@ public class GUI extends javax.swing.JFrame {
         Fondo.setSize(x, y);
         this.setSize(x, y);
         menu.setOpaque(false);
-        //menu1.setOpaque(false);
+        menu1.setOpaque(false);
+        ((PanelGrafo)menu1).setTransparentImage();
         menu.setLocation((x / 2) - 150, y / 5);
 
         //
@@ -72,7 +75,7 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menu1 = new javax.swing.JPanel();
+        menu1 = new PanelGrafo();
         menu = new javax.swing.JPanel();
         b_ingresar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
@@ -85,6 +88,11 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         menu1.setBackground(new java.awt.Color(255, 255, 255));
+        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menu1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
         menu1.setLayout(menu1Layout);
@@ -172,6 +180,14 @@ public class GUI extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MousePressed
+        try {
+            ((PanelGrafo)menu1).addImage(ImageIO.read(new File("./src/Imagenes/star.png")), evt.getX(), evt.getY());
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menu1MousePressed
 
     /**
      * @param args the command line arguments

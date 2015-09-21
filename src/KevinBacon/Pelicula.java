@@ -9,7 +9,7 @@ package KevinBacon;
  *
  * @author Isaias
  */
-public class Pelicula {
+public class Pelicula{
     private String titulo;
     private int añoDeExhibicion;
     private String studio;
