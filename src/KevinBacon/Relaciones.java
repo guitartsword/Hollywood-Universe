@@ -10,49 +10,43 @@ package KevinBacon;
  * @author Isaias
  */
 public class Relaciones {
+    private String tipo;
+    private String a1;
+    private String a2;
 
-    /**
-     * Es una relacion de amigos
-     */
-    public final int AMISTAD = 0;
-
-    /**
-     * Una relacion familiar
-     */
-    public final int FAMILIA = 1;
-
-    /**
-     * Una realcion amorosa, no comprometidos
-     */
-    public final int NOVIAZGO = 2;
-    
-    /**
-     *Una relacion de Esposo-Esposa
-     */
-    public final int MATRIMONIO = 3;
-    private int tipo;
-
-    public Relaciones(int tipo) {
-        this.tipo = tipo;
+    public Relaciones(String relacion, String a1, String a2) {
+        tipo=relacion;
+        this.a1=a1;
+        this.a2=a2;
     }
 
     public String getTipo() {
-        if(tipo == AMISTAD)
-            return "Amistad";
-        if(tipo == FAMILIA)
-            return "Familia";
-        if(tipo == NOVIAZGO)
-            return "Noviazgo";
-        if(tipo == MATRIMONIO)
-            return "Matrimonio";
-        return "No hay relacion";
+        return tipo;
     }
 
-    public void setTipo(int tipo) {
-        if(tipo < 0 || tipo > 3){
-            tipo = 0;
-        }
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public String getA1() {
+        return a1;
+    }
+
+    public void setA1(String a1) {
+        this.a1 = a1;
+    }
+
+    public String getA2() {
+        return a2;
+    }
+
+    public void setA2(String a2) {
+        this.a2 = a2;
+    }
+
     
+    @Override
+    public String toString() {
+        return tipo;
+    }
 }

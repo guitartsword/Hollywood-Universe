@@ -15,12 +15,13 @@ public class Actor {
     private String nombreCompleto;
     private int edad;
     private String nacionalidad;
-    private ArrayList<Pelicula> particapado;
+    private ArrayList<Pelicula> participado;
 
     public Actor(String nombreCompleto, int edad, String nacionalidad) {
         this.nombreCompleto = nombreCompleto;
         this.edad = edad;
         this.nacionalidad = nacionalidad;
+        participado=new ArrayList();
     }
 
     public Actor() {
@@ -51,11 +52,20 @@ public class Actor {
     }
 
     public ArrayList<Pelicula> getParticapado() {
-        return particapado;
+        return participado;
     }
 
     public void setParticapado(ArrayList<Pelicula> particapado) {
-        this.particapado = particapado;
+        this.participado = particapado;
+    }
+    
+    public void addParticapado(Pelicula p) {
+        participado.add(p);
+    }
+
+    @Override
+    public String toString() {
+        return nombreCompleto;
     }
     
 }
