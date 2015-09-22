@@ -8,7 +8,10 @@ package KevinBacon;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.awt.event.MouseMotionListener;
 public class PanelGrafo extends javax.swing.JPanel {
     private Color transparent;
     private BufferedImage background;
+    private double scale = 1.2;
     /**
      * Creates new form PanelGrafo
      */
@@ -55,10 +59,21 @@ public class PanelGrafo extends javax.swing.JPanel {
         }
     }
     public void addImage(BufferedImage image, int x, int y){
-        BufferedImage part = background.getSubimage(x, y, image.getWidth(), image.getHeight());
-        part.setData(image.getRaster());
-        repaint();
-        System.out.println("Nueva imagen!");
+        try{
+            BufferedImage part = background.getSubimage(x-image.getWidth()/2, y-image.getHeight()/2, image.getWidth(), image.getHeight());
+            for(int i = 0; i < part.getWidth(); i++){
+                for (int j = 0; j < part.getHeight(); j++) {
+                    int alpha = new Color(image.getRGB(i, j), true).getAlpha();
+                    if(alpha > 40){
+                        part.setRGB(i, j, image.getRGB(i, j));
+                    }
+                }
+            }
+            repaint();
+            System.out.println("Nueva imagen!");
+        }catch(java.awt.image.RasterFormatException e){
+            
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -67,13 +82,16 @@ public class PanelGrafo extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(background != null)        {
+        if(background != null) {
             g.drawImage(background, 0, 0, this);
         }
-    }
-
-    @Override
-    public synchronized void addMouseMotionListener(MouseMotionListener l) {
-        super.addMouseMotionListener(l); //To change body of generated methods, choose Tools | Templates.
-    }
+        /*
+        Graphics2D g2 = (Graphics2D) g;
+        int w = getWidth();
+        int h = getHeight();
+        // Translate used to make sure scale is centered
+        g2.translate(w/2, h/2);
+        g2.scale(scale, scale);
+        g2.translate(-w/2, -h/2);*/
+    }    
 }

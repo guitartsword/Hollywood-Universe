@@ -10,6 +10,8 @@ import edu.uci.ics.jung.graph.SparseMultigraph;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JViewport;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,9 +33,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Brenda
  */
 public class GUI extends javax.swing.JFrame {
+    private BufferedImage nodo;
+    private Point MouseStart;
 
     /**
      * Creates new form GUI
+     * @throws java.io.IOException
      */
     public GUI() throws IOException {
         this.setUndecorated(true);
@@ -53,7 +59,7 @@ public class GUI extends javax.swing.JFrame {
         Fondo.setSize(x, y);
         this.setSize(x, y);
         menu.setOpaque(false);
-        menu1.setOpaque(false);
+        //menu1.setOpaque(false);
         ((PanelGrafo)menu1).setTransparentImage();
         menu.setLocation((x / 2) - 150, y / 5);
 
@@ -64,6 +70,10 @@ public class GUI extends javax.swing.JFrame {
         leer(new File("./default.txt"));
         System.out.println(g.toString());
         //
+        //Imagen del nodo
+        Image nodoImg = ImageIO.read(new File("./src/Imagenes/star.png"));
+        nodo = new BufferedImage(30,30, BufferedImage.TYPE_4BYTE_ABGR);
+        nodo.getGraphics().drawImage(nodoImg.getScaledInstance(30, 30, 0), 0, 0, null);
     }
 
     /**
@@ -75,10 +85,11 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menu1 = new PanelGrafo();
         menu = new javax.swing.JPanel();
         b_ingresar = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
+        scrollGraph = new javax.swing.JScrollPane();
+        menu1 = new PanelGrafo();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -86,27 +97,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        menu1.setBackground(new java.awt.Color(255, 255, 255));
-        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                menu1MousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
-        menu1.setLayout(menu1Layout);
-        menu1Layout.setHorizontalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
-        );
-        menu1Layout.setVerticalGroup(
-            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(menu1);
-        menu1.setBounds(260, 20, 830, 540);
 
         menu.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,6 +123,33 @@ public class GUI extends javax.swing.JFrame {
         menu.setBounds(20, 20, 230, 220);
         getContentPane().add(Fondo);
         Fondo.setBounds(10, 570, 0, 60);
+
+        menu1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                menu1MouseDragged(evt);
+            }
+        });
+        menu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menu1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
+        menu1.setLayout(menu1Layout);
+        menu1Layout.setHorizontalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1400, Short.MAX_VALUE)
+        );
+        menu1Layout.setVerticalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+
+        scrollGraph.setViewportView(menu1);
+
+        getContentPane().add(scrollGraph);
+        scrollGraph.setBounds(270, 20, 800, 610);
 
         jMenu1.setText("File");
 
@@ -182,12 +199,19 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void menu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MousePressed
-        try {
-            ((PanelGrafo)menu1).addImage(ImageIO.read(new File("./src/Imagenes/star.png")), evt.getX(), evt.getY());
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if(evt.isMetaDown())
+            ((PanelGrafo)menu1).addImage(nodo,evt.getX(),evt.getY());
+        MouseStart = evt.getPoint();
     }//GEN-LAST:event_menu1MousePressed
+
+    private void menu1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseDragged
+        if(evt.getButton() == 0){
+            JViewport viewPort = scrollGraph.getViewport();
+            Point vpp = viewPort.getViewPosition();
+            vpp.translate(MouseStart.x-evt.getX(), MouseStart.y-evt.getY());
+            menu1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
+        }
+    }//GEN-LAST:event_menu1MouseDragged
 
     /**
      * @param args the command line arguments
@@ -380,6 +404,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menu1;
+    private javax.swing.JScrollPane scrollGraph;
     // End of variables declaration//GEN-END:variables
     int x;
     int y;
