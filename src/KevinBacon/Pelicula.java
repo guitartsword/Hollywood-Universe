@@ -46,5 +46,11 @@ public class Pelicula{
     public void setStudio(String studio) {
         this.studio = studio;
     }
+
+    @Override
+    public String toString() {
+        return titulo+" ("+añoDeExhibicion+")";
+    }
+    
     
 }

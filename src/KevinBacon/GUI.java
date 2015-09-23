@@ -21,6 +21,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class GUI extends javax.swing.JFrame {
         //menu1.setOpaque(false);
         ((PanelGrafo) menu1).setTransparentImage();
         menu.setLocation((x / 2) - 150, y / 5);
-
+        jPanel11.setVisible(false);
         //
         scrollGraph.setVisible(false);
         universo = new SparseMultigraph<>();
@@ -162,6 +163,8 @@ public class GUI extends javax.swing.JFrame {
         b_ingresar = new javax.swing.JButton();
         scrollGraph = new javax.swing.JScrollPane();
         menu1 = new PanelGrafo();
+        jPanel11 = new javax.swing.JPanel();
+        DetallesActor = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -704,15 +707,19 @@ public class GUI extends javax.swing.JFrame {
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(b_ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(b_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(b_ingresar, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(b_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(menu);
-        menu.setBounds(20, 20, 230, 220);
+        menu.setBounds(30, 100, 230, 220);
 
         scrollGraph.setOpaque(false);
 
@@ -743,6 +750,29 @@ public class GUI extends javax.swing.JFrame {
 
         getContentPane().add(scrollGraph);
         scrollGraph.setBounds(270, 20, 800, 610);
+
+        jPanel11.setBackground(new java.awt.Color(0, 0, 0));
+
+        DetallesActor.setForeground(new java.awt.Color(255, 255, 255));
+        DetallesActor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(DetallesActor, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 96, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(DetallesActor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(jPanel11);
+        jPanel11.setBounds(270, 630, 800, 30);
         getContentPane().add(Fondo);
         Fondo.setBounds(10, 570, 0, 60);
 
@@ -782,6 +812,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void b_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_ingresarActionPerformed
         try {
+            jPanel11.setVisible(true);
             menu.setVisible(false);
             scrollGraph.setVisible(true);
             BufferedImage bi = ImageIO.read(new File("./src/Imagenes/fondo2.png"));
@@ -816,7 +847,7 @@ public class GUI extends javax.swing.JFrame {
         Point vpp = viewPort.getViewPosition();
         vpp.translate(MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
         menu1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
-        System.out.printf("dx = %d; dy = %d;\n",MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
+        System.out.printf("dx = %d; dy = %d;\n", MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
     }//GEN-LAST:event_menu1MouseDragged
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
@@ -875,15 +906,15 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
                 if (pasar) {
-                    historial.push("Se leyo de un Archvio y se agrego la relacion " + (String)rcb.getSelectedItem() + " entre " + actor1.toString() + " y " + actor2.toString());
-                    universo.addEdge(new Relaciones((String)rcb.getSelectedItem(), actor1.getNombreCompleto(), actor2.getNombreCompleto()), actor1, actor2);
-                }else{
+                    historial.push("Se leyo de un Archvio y se agrego la relacion " + (String) rcb.getSelectedItem() + " entre " + actor1.toString() + " y " + actor2.toString());
+                    universo.addEdge(new Relaciones((String) rcb.getSelectedItem(), actor1.getNombreCompleto(), actor2.getNombreCompleto()), actor1, actor2);
+                } else {
                     JOptionPane.showMessageDialog(vrelacion, "Ya existe una relacion", "ERROR", 2);
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(vrelacion, "No se puede agregar relacion al mismo actor", "ERROR", 2);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(vrelacion, "Error", "ERROR", 2);
         }
         cb.setSelectedIndex(0);
@@ -1089,51 +1120,51 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void dibujarGrafo() {
-        Point Center = new Point(menu1.getWidth()/2,menu1.getHeight()/2);
+        Point Center = new Point(menu1.getWidth() / 2, menu1.getHeight() / 2);
         int change = 100;
-        int cont=0;
+        int cont = 0;
         boolean diagonal = true;
-        for(Actor vertex:universo.getVertices()){
+        for (Actor vertex : universo.getVertices()) {
             NodeButton bu = new NodeButton(vertex);
             bu.setContentAreaFilled(false);
             bu.setIcon(new ImageIcon(nodo));
             bu.setSize(nodo.getWidth(), nodo.getHeight());
-            if(cont == 0){
-                
+            if (cont == 0) {
+
                 bu.setLocation(Center);
-            }else{
-                if(diagonal){
-                    switch(cont%4){
+            } else {
+                if (diagonal) {
+                    switch (cont % 4) {
                         case 0:
-                            bu.setLocation(Center.x+change,Center.y-change);
+                            bu.setLocation(Center.x + change, Center.y - change);
                             change += 150;
                             diagonal = !diagonal;
                             break;
                         case 1:
-                            bu.setLocation(Center.x+change,Center.y+change);
+                            bu.setLocation(Center.x + change, Center.y + change);
                             break;
                         case 2:
-                            bu.setLocation(Center.x-change,Center.y+change);
+                            bu.setLocation(Center.x - change, Center.y + change);
                             break;
                         case 3:
-                            bu.setLocation(Center.x-change,Center.y-change);
+                            bu.setLocation(Center.x - change, Center.y - change);
                             break;
                     }
-                }else{
-                    switch(cont%4){
+                } else {
+                    switch (cont % 4) {
                         case 0:
-                            bu.setLocation(Center.x,Center.y-change);
+                            bu.setLocation(Center.x, Center.y - change);
                             change += 150;
                             diagonal = !diagonal;
                             break;
                         case 1:
-                            bu.setLocation(Center.x+change,Center.y);
+                            bu.setLocation(Center.x + change, Center.y);
                             break;
                         case 2:
-                            bu.setLocation(Center.x,Center.y+change);
+                            bu.setLocation(Center.x, Center.y + change);
                             break;
                         case 3:
-                            bu.setLocation(Center.x-change,Center.y);
+                            bu.setLocation(Center.x - change, Center.y);
                             break;
                     }
                 }
@@ -1145,7 +1176,7 @@ public class GUI extends javax.swing.JFrame {
                     tefi_actorNacionalidadMod.setText(bu.getActor().getNacionalidad());
                     sp_actorEdadMod.setValue(bu.getActor().getEdad());
                     DefaultListModel<Pelicula> lista = new DefaultListModel();
-                    for(Pelicula temp:bu.getActor().getParticapado()){
+                    for (Pelicula temp : bu.getActor().getParticapado()) {
                         lista.addElement(temp);
                     }
                     lista_Particiapdo.setModel(lista);
@@ -1156,6 +1187,20 @@ public class GUI extends javax.swing.JFrame {
                     vmodificar.setVisible(true);
                 }
             });
+            bu.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    DetallesActor.setText("Nombre: " + bu.getActor().toString()
+                            + " Edad: " + bu.getActor().getEdad()
+                            + " Nacionalidad: " + bu.getActor().getNacionalidad());
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    DetallesActor.setText(null);
+                }
+                
+            });
             menu1.add(bu);
             menu1.repaint();
             cont++;
@@ -1163,6 +1208,7 @@ public class GUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu ClickNodo;
+    private javax.swing.JLabel DetallesActor;
     private javax.swing.JLabel Fondo;
     private javax.swing.JMenuItem Historial;
     private javax.swing.JMenuItem agregarNodo;
@@ -1201,6 +1247,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
