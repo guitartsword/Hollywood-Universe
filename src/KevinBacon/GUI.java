@@ -606,10 +606,10 @@ public class GUI extends javax.swing.JFrame {
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
         peliculas = new ArrayList();
-        vagregar.setLocationRelativeTo(this);
         vagregar.pack();
         vagregar.setAlwaysOnTop(true);
         vagregar.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        vagregar.setLocationRelativeTo(this);
         vagregar.setVisible(true);
 
     }//GEN-LAST:event_agregarNodoActionPerformed
