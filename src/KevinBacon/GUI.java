@@ -5,10 +5,10 @@
  */
 package KevinBacon;
 
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+//import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
-import edu.uci.ics.jung.visualization.VisualizationImageServer;
+//import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,6 +28,7 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -76,10 +77,10 @@ public class GUI extends javax.swing.JFrame {
 
         //
         scrollGraph.setVisible(false);
-        g = new SparseMultigraph<>();
+        universo = new SparseMultigraph<>();
         historial = new Stack();
         leer(new File("./default.txt"));
-        System.out.println(g.toString());
+        System.out.println(universo.toString());
         //
         //Imagen del nodo
         Image nodoImg = ImageIO.read(new File("./src/Imagenes/star.png"));
@@ -136,6 +137,24 @@ public class GUI extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         ClickNodo = new javax.swing.JPopupMenu();
         agregarNodo = new javax.swing.JMenuItem();
+        agregarRelacion = new javax.swing.JMenuItem();
+        vhistorial = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        lreporte = new javax.swing.JLabel();
+        vrelacion = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        rcb = new javax.swing.JComboBox();
+        jButton6 = new javax.swing.JButton();
+        jLabel25 = new javax.swing.JLabel();
+        cb2 = new javax.swing.JComboBox();
+        jLabel26 = new javax.swing.JLabel();
+        cb = new javax.swing.JComboBox();
         menu = new javax.swing.JPanel();
         b_ingresar = new javax.swing.JButton();
         scrollGraph = new javax.swing.JScrollPane();
@@ -144,6 +163,7 @@ public class GUI extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        Historial = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -483,6 +503,198 @@ public class GUI extends javax.swing.JFrame {
         });
         ClickNodo.add(agregarNodo);
 
+        agregarRelacion.setText("Agregar Relacion");
+        agregarRelacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarRelacionActionPerformed(evt);
+            }
+        });
+        ClickNodo.add(agregarRelacion);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel14.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel14.setText("El ultimo reporte en el historial fue:");
+
+        lreporte.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        lreporte.setForeground(new java.awt.Color(102, 102, 255));
+        lreporte.setText("  ");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lreporte))
+                    .addComponent(jLabel14))
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lreporte)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout vhistorialLayout = new javax.swing.GroupLayout(vhistorial.getContentPane());
+        vhistorial.getContentPane().setLayout(vhistorialLayout);
+        vhistorialLayout.setHorizontalGroup(
+            vhistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vhistorialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        vhistorialLayout.setVerticalGroup(
+            vhistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vhistorialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setLayout(null);
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gear.gif"))); // NOI18N
+        jPanel8.add(jLabel15);
+        jLabel15.setBounds(-110, -20, 320, 310);
+
+        jPanel9.setBackground(new java.awt.Color(51, 153, 255));
+
+        jLabel17.setFont(new java.awt.Font("Impact", 0, 26)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Nuevo Actor");
+
+        jPanel10.setBackground(new java.awt.Color(153, 255, 153));
+
+        jLabel23.setFont(new java.awt.Font("Impact", 0, 26)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Relacion");
+
+        rcb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FAMILIA", "MATRIMONIO", "AMISTAD", "NOVIAZGO" }));
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(rcb, 0, 310, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rcb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        jButton6.setBackground(new java.awt.Color(255, 255, 255));
+        jButton6.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(102, 153, 255));
+        jButton6.setText("AGREGAR RELACION");
+        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel25.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Actor");
+
+        cb2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel26.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Actor");
+
+        cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel17)
+                            .addGap(179, 179, 179))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(cb, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        jPanel8.add(jPanel9);
+        jPanel9.setBounds(210, 10, 690, 320);
+
+        javax.swing.GroupLayout vrelacionLayout = new javax.swing.GroupLayout(vrelacion.getContentPane());
+        vrelacion.getContentPane().setLayout(vrelacionLayout);
+        vrelacionLayout.setHorizontalGroup(
+            vrelacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vrelacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        vrelacionLayout.setVerticalGroup(
+            vrelacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vrelacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
@@ -551,6 +763,14 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        Historial.setText("Historial");
+        Historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HistorialActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Historial);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         jMenuItem2.setText("Salir");
@@ -621,7 +841,7 @@ public class GUI extends javax.swing.JFrame {
         try {
             Actor temporal = new Actor(tefi_actorNombre.getText(), Integer.parseInt(sp_actorEdad.getModel().getValue().toString()), tefi_actorNacionalidad.getText());
             temporal.setParticapado(peliculas);
-            g.addVertex(temporal);
+            universo.addVertex(temporal);
             historial.push("Se agrego el actor " + tefi_actorNombre.getText());
             tefi_actorNombre.setText(null);
             sp_actorEdad.setValue(0);
@@ -632,15 +852,70 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
         String nombre = tefi_peliculaNombre.getText();
         int año = (int) sp_peliculaAño.getValue();
         String studio = tefi_peliculaStudio.getText();
         peliculas.add(new Pelicula(nombre, año, studio));
+        historial.push("Se agrego la pelicula " + tefi_peliculaNombre.getText());
         tefi_peliculaNombre.setText("");
         sp_peliculaAño.setValue(2015);
         tefi_peliculaStudio.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialActionPerformed
+        lreporte.setText((String) historial.pop());
+        vhistorial.pack();
+        vhistorial.setAlwaysOnTop(true);
+        vhistorial.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        vhistorial.setLocationRelativeTo(this);
+        vhistorial.setVisible(true);
+    }//GEN-LAST:event_HistorialActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Actor actor1 = (Actor) cb.getSelectedItem();
+        Actor actor2 = (Actor) cb2.getSelectedItem();
+        if (actor1 != null && actor2 != null) {
+            if (!actor1.getNombreCompleto().equals(actor2.getNombreCompleto())) {
+                boolean pasar = true;
+                for (Relaciones temp : universo.getEdges()) {
+                    if (temp.getA1().equals(actor1.getNombreCompleto()) && temp.getA2().equals(actor2.getNombreCompleto())) {
+                        pasar = false;
+                    }
+                }
+                if (pasar) {
+                    historial.push("Se leyo de un Archvio y se agrego la relacion " + (String)rcb.getSelectedItem() + " entre " + actor1.toString() + " y " + actor2.toString());
+                    universo.addEdge(new Relaciones((String)rcb.getSelectedItem(), actor1.getNombreCompleto(), actor2.getNombreCompleto()), actor1, actor2);
+                }else{
+                    JOptionPane.showMessageDialog(vrelacion, "Ya existe una relacion", "ERROR", 2);
+                }
+            }else{
+                JOptionPane.showMessageDialog(vrelacion, "No se puede agregar relacion al mismo actor", "ERROR", 2);
+            }
+        }else{
+            JOptionPane.showMessageDialog(vrelacion, "Error", "ERROR", 2);
+        }
+        cb.setSelectedIndex(0);
+        cb2.setSelectedIndex(0);
+        rcb.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void agregarRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarRelacionActionPerformed
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
+        for (Actor temp : universo.getVertices()) {
+            model.addElement(temp);
+            model2.addElement(temp);
+        }
+        cb.setModel(model);
+        cb2.setModel(model2);
+        if (model.getSize() > 0) {
+            vrelacion.pack();
+            vrelacion.setAlwaysOnTop(true);
+            vrelacion.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            vrelacion.setLocationRelativeTo(this);
+            vrelacion.setVisible(true);
+        }
+    }//GEN-LAST:event_agregarRelacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -746,8 +1021,8 @@ public class GUI extends javax.swing.JFrame {
         Actor temp2 = null;
         try {
             //Busqueda de Existencia
-            if (g.getVertices() != null) {
-                for (Actor temp : g.getVertices()) {
+            if (universo.getVertices() != null) {
+                for (Actor temp : universo.getVertices()) {
                     if ((Actor1[0] + " " + Actor1[1]).equals(temp.getNombreCompleto())) {
                         temp1 = temp;
                     }
@@ -777,8 +1052,8 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
 
-                g.addVertex(temp1);
-                g.addVertex(temp2);
+                universo.addVertex(temp1);
+                universo.addVertex(temp2);
             } else if (temp1 == null) {
                 temp1 = new Actor((Actor1[0] + " " + Actor1[1]), Integer.parseInt(Actor1[2]), Actor1[3]);
                 if (Actor1.length > 4) {
@@ -789,7 +1064,7 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
                 historial.push("Se leyo de un Archvio y se creo el Actor " + temp1.toString());
-                g.addVertex(temp1);
+                universo.addVertex(temp1);
             } else if (temp2 == null) {
                 temp2 = new Actor((Actor2[0] + " " + Actor2[1]), Integer.parseInt(Actor2[2]), Actor2[3]);
                 if (Actor2.length > 4) {
@@ -800,19 +1075,19 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
                 historial.push("Se leyo de un Archvio y se creo el Actor " + temp2.toString());
-                g.addVertex(temp2);
+                universo.addVertex(temp2);
             }
 
             if (!temp1.getNombreCompleto().equals(temp2.getNombreCompleto())) {
                 boolean pasar = true;
-                for (Relaciones temp : g.getEdges()) {
+                for (Relaciones temp : universo.getEdges()) {
                     if (temp.getA1().equals(temp1.getNombreCompleto()) && temp.getA2().equals(temp2.getNombreCompleto())) {
                         pasar = false;
                     }
                 }
                 if (pasar) {
                     historial.push("Se leyo de un Archvio y se agrego la relacion " + relacion + " entre " + temp1.toString() + " y " + temp2.toString());
-                    g.addEdge(new Relaciones(relacion, temp1.getNombreCompleto(), temp2.getNombreCompleto()), temp1, temp2);
+                    universo.addEdge(new Relaciones(relacion, temp1.getNombreCompleto(), temp2.getNombreCompleto()), temp1, temp2);
                 }
             }
             dibujarGrafo();
@@ -821,26 +1096,38 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al crear el grafo", "ERROR", 2);
         }
     }
+
     private void dibujarGrafo() {
-         
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu ClickNodo;
     private javax.swing.JLabel Fondo;
+    private javax.swing.JMenuItem Historial;
     private javax.swing.JMenuItem agregarNodo;
+    private javax.swing.JMenuItem agregarRelacion;
     private javax.swing.JButton b_ingresar;
+    private javax.swing.JComboBox cb;
+    private javax.swing.JComboBox cb2;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -854,17 +1141,23 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lreporte;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menu1;
+    private javax.swing.JComboBox rcb;
     private javax.swing.JScrollPane scrollGraph;
     private javax.swing.JSpinner sp_actorEdad;
     private javax.swing.JSpinner sp_peliculaAño;
@@ -873,11 +1166,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField tefi_peliculaNombre;
     private javax.swing.JTextField tefi_peliculaStudio;
     private javax.swing.JDialog vagregar;
+    private javax.swing.JDialog vhistorial;
     private javax.swing.JDialog vmodificar;
+    private javax.swing.JDialog vrelacion;
     // End of variables declaration//GEN-END:variables
     int x;
     int y;
-    Graph<Actor, Relaciones> g;
+    Graph<Actor, Relaciones> universo;
     Stack historial;
     ArrayList<Pelicula> peliculas;
 }
