@@ -9,7 +9,10 @@ package KevinBacon;
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.graph.util.Pair;
 import edu.uci.ics.jung.visualization.VisualizationImageServer;
+import java.awt.Component;
+import java.awt.Container;
 //import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -36,6 +39,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JViewport;
@@ -50,6 +54,7 @@ public class GUI extends javax.swing.JFrame {
 
     private BufferedImage nodo;
     private Point MouseStart;
+    private NodeButton SelectedNode;
 
     /**
      * Creates new form GUI
@@ -139,6 +144,7 @@ public class GUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         sp_actorEdadMod = new javax.swing.JSpinner();
+        jButton7 = new javax.swing.JButton();
         ClickNodo = new javax.swing.JPopupMenu();
         agregarNodo = new javax.swing.JMenuItem();
         agregarRelacion = new javax.swing.JMenuItem();
@@ -410,8 +416,8 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
@@ -419,12 +425,28 @@ public class GUI extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(102, 153, 255));
         jButton5.setText("Guardar Actor");
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Nombre Completo");
 
         sp_actorEdadMod.setModel(new javax.swing.SpinnerNumberModel(0, 0, 130, 1));
+
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
+        jButton7.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(102, 153, 255));
+        jButton7.setText("Eliminar Actor");
+        jButton7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -442,15 +464,19 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                     .addComponent(sp_actorEdadMod))
                 .addGap(33, 33, 33)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)
@@ -463,10 +489,14 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tefi_actorNacionalidadMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tefi_actorNacionalidadMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -847,7 +877,6 @@ public class GUI extends javax.swing.JFrame {
         Point vpp = viewPort.getViewPosition();
         vpp.translate(MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
         menu1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
-        System.out.printf("dx = %d; dy = %d;\n", MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
     }//GEN-LAST:event_menu1MouseDragged
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
@@ -869,6 +898,7 @@ public class GUI extends javax.swing.JFrame {
             tefi_actorNombre.setText(null);
             sp_actorEdad.setValue(0);
             tefi_actorNacionalidad.setText(null);
+            dibujarGrafo();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Revise el valor de la edad");
         }
@@ -939,6 +969,28 @@ public class GUI extends javax.swing.JFrame {
             vrelacion.setVisible(true);
         }
     }//GEN-LAST:event_agregarRelacionActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        SelectedNode.getActor().setNombreCompleto(tefi_actorNombreMod.getText());
+        SelectedNode.getActor().setNacionalidad(tefi_actorNacionalidadMod.getText());
+        DefaultListModel<Pelicula> temp = (DefaultListModel<Pelicula>) lista_Particiapdo.getModel();
+        /*
+         ArrayList<Pelicula> lista = new ArrayList();
+         for(int i = 0; i < temp.size(); i++){
+         lista.add(temp.get(i));
+         }
+         SelectedNode.getActor().setParticapado(lista);
+         */
+        SelectedNode.getActor().setEdad((int) sp_actorEdadMod.getValue());
+        dibujarGrafo();
+        vmodificar.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        universo.removeVertex(SelectedNode.getActor());
+        menu1.remove(SelectedNode);
+        dibujarGrafo();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1185,6 +1237,7 @@ public class GUI extends javax.swing.JFrame {
                     vagregar.setAlwaysOnTop(true);
                     vagregar.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                     vmodificar.setVisible(true);
+                    SelectedNode = bu;
                 }
             });
             bu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1199,13 +1252,79 @@ public class GUI extends javax.swing.JFrame {
                 public void mouseExited(MouseEvent e) {
                     DetallesActor.setText(null);
                 }
-                
+
             });
             menu1.add(bu);
-            menu1.repaint();
             cont++;
         }
+        
+        ArrayList<Line> lines = new ArrayList();
+        for(Relaciones arista: universo.getEdges()){
+            Pair<Actor> nodes = universo.getEndpoints(arista);
+            Actor first = nodes.getFirst();
+            Actor second = nodes.getSecond();
+            Point start = null;
+            Point end = null;
+            for(Component node : menu1.getComponents()){
+                if(node instanceof NodeButton){
+                    if(((NodeButton)node).getActor().equals(first))
+                        start = node.getLocation();
+                    else if(((NodeButton)node).getActor().equals(second))
+                        end = node.getLocation();
+                }
+            }
+            if(start != null && end != null){
+                start.translate(15, 15);
+                end.translate(15,15);
+                lines.add(new Line(start, end));
+            }
+        }
+        ((PanelGrafo)menu1).setLines(lines);
+        menu1.repaint();
     }
+
+    private BufferedImage createImage(JComponent component) {
+        //  Make sure the component has a size and has been layed out.
+        //  (necessary check for components not added to a realized frame)
+        Rectangle region = new Rectangle(0, 0, component.getWidth(), component.getHeight());
+        if (!component.isDisplayable()) {
+            Dimension d = component.getSize();
+
+            if (d.width == 0 || d.height == 0) {
+                d = component.getPreferredSize();
+                component.setSize(d);
+            }
+
+            layoutComponent(component);
+        }
+
+        BufferedImage image = new BufferedImage(region.width, region.height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+
+        //  Paint a background for non-opaque components,
+        //  otherwise the background will be black
+        if (!component.isOpaque()) {
+            g2d.setColor(component.getBackground());
+            g2d.fillRect(region.x, region.y, region.width, region.height);
+        }
+
+        g2d.translate(-region.x, -region.y);
+        component.paint(g2d);
+        g2d.dispose();
+        return image;
+    }
+    private void layoutComponent(Component component) {
+        synchronized (component.getTreeLock()) {
+            component.doLayout();
+
+            if (component instanceof Container) {
+                for (Component child : ((Container) component).getComponents()) {
+                    layoutComponent(child);
+                }
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu ClickNodo;
     private javax.swing.JLabel DetallesActor;
@@ -1220,6 +1339,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

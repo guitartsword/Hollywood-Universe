@@ -7,30 +7,29 @@ package KevinBacon;
 
 import java.awt.image.BufferedImage;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelListener;
-import javax.swing.Icon;
-import javax.swing.JButton;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
  * @author Isaias
  */
 public class PanelGrafo extends javax.swing.JPanel {
+
     private Color transparent;
     private BufferedImage background;
     private double scale = 1.2;
+    private ArrayList<Line> lines = new ArrayList();
+    private ArrayList<NodeButton> nodes = new ArrayList();
+
     /**
      * Creates new form PanelGrafo
      */
     public PanelGrafo() {
         initComponents();
-        transparent = new Color(0,0,0,0);
+        transparent = new Color(0, 0, 0, 0);
     }
 
     /**
@@ -53,51 +52,54 @@ public class PanelGrafo extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void setTransparentImage(){
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (Line temp : lines) {
+            g.drawLine(temp.getInicio().x, temp.getInicio().y
+                     , temp.getFin().x, temp.getFin().y);
+        }
+    }
+
+    @Override
+    public Component add(Component comp) {
+        if(comp instanceof NodeButton)
+            nodes.add((NodeButton) comp);
+        return super.add(comp);
+    }
+    public void setLines(ArrayList<Line> lines){
+        this.lines = lines;
+    }
+    public void setTransparentImage() {
         background = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-        for(int i = 0; i < background.getWidth(); i++){
+        for (int i = 0; i < background.getWidth(); i++) {
             for (int j = 0; j < background.getHeight(); j++) {
                 background.setRGB(i, j, transparent.getRGB());
             }
         }
     }
-    public void addImage(BufferedImage image, int x, int y){
-        try{
-            BufferedImage part = background.getSubimage(x-image.getWidth()/2, y-image.getHeight()/2, image.getWidth(), image.getHeight());
-            for(int i = 0; i < part.getWidth(); i++){
+
+    public void addImage(BufferedImage image, int x, int y) {
+        try {
+            BufferedImage part = background.getSubimage(x - image.getWidth() / 2, y - image.getHeight() / 2, image.getWidth(), image.getHeight());
+            for (int i = 0; i < part.getWidth(); i++) {
                 for (int j = 0; j < part.getHeight(); j++) {
                     int alpha = new Color(image.getRGB(i, j), true).getAlpha();
-                    if(alpha > 40){
+                    if (alpha > 40) {
                         part.setRGB(i, j, image.getRGB(i, j));
                     }
                 }
             }
             repaint();
             System.out.println("Nueva imagen!");
-        }catch(java.awt.image.RasterFormatException e){
-            
+        } catch (java.awt.image.RasterFormatException e) {
+
         }
     }
-    public BufferedImage getBackgroundImage(){
+
+    public BufferedImage getBackgroundImage() {
         return background;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        /*if(background != null) {
-            g.drawImage(background, 0, 0, this);
-        }
-        /*
-        Graphics2D g2 = (Graphics2D) g;
-        int w = getWidth();
-        int h = getHeight();
-        // Translate used to make sure scale is centered
-        g2.translate(w/2, h/2);
-        g2.scale(scale, scale);
-        g2.translate(-w/2, -h/2);*/
-    }    
 }
