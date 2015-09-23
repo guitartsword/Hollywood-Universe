@@ -125,7 +125,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         sp_peliculaAño = new javax.swing.JSpinner();
-        jButton2 = new javax.swing.JButton();
+        bu_agregarActor = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         sp_actorEdad = new javax.swing.JSpinner();
         vmodificar = new javax.swing.JDialog();
@@ -272,14 +272,14 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(102, 153, 255));
-        jButton2.setText("Agregar Actor");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bu_agregarActor.setBackground(new java.awt.Color(255, 255, 255));
+        bu_agregarActor.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        bu_agregarActor.setForeground(new java.awt.Color(102, 153, 255));
+        bu_agregarActor.setText("Agregar Actor");
+        bu_agregarActor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        bu_agregarActor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bu_agregarActorActionPerformed(evt);
             }
         });
 
@@ -307,7 +307,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(tefi_actorNacionalidad))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bu_agregarActor, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(sp_actorEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -335,7 +335,7 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tefi_actorNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bu_agregarActor, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -889,7 +889,7 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_agregarNodoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bu_agregarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bu_agregarActorActionPerformed
         try {
             Actor temporal = new Actor(tefi_actorNombre.getText(), Integer.parseInt(sp_actorEdad.getModel().getValue().toString()), tefi_actorNacionalidad.getText());
             temporal.setParticapado(peliculas);
@@ -902,7 +902,7 @@ public class GUI extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Revise el valor de la edad");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bu_agregarActorActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String nombre = tefi_peliculaNombre.getText();
@@ -1176,13 +1176,13 @@ public class GUI extends javax.swing.JFrame {
         int change = 100;
         int cont = 0;
         boolean diagonal = true;
+        menu1.removeAll();
         for (Actor vertex : universo.getVertices()) {
             NodeButton bu = new NodeButton(vertex);
             bu.setContentAreaFilled(false);
             bu.setIcon(new ImageIcon(nodo));
             bu.setSize(nodo.getWidth(), nodo.getHeight());
             if (cont == 0) {
-
                 bu.setLocation(Center);
             } else {
                 if (diagonal) {
@@ -1333,9 +1333,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem agregarNodo;
     private javax.swing.JMenuItem agregarRelacion;
     private javax.swing.JButton b_ingresar;
+    private javax.swing.JButton bu_agregarActor;
     private javax.swing.JComboBox cb;
     private javax.swing.JComboBox cb2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
