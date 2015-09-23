@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.CubicCurve2D;
 import java.util.ArrayList;
 
 /**
@@ -55,9 +57,34 @@ public class PanelGrafo extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int i =0;
         for (Line temp : lines) {
-            g.drawLine(temp.getInicio().x, temp.getInicio().y
-                     , temp.getFin().x, temp.getFin().y);
+            switch(i%4){
+                case 0:
+                    g.setColor(Color.BLACK);
+                    break;
+                case 1:
+                    g.setColor(Color.RED);
+                    break;
+                case 2:
+                    g.setColor(Color.GREEN);
+                    break;
+                case 3:
+                    g.setColor(Color.BLUE);
+                    break;
+            }
+            CubicCurve2D cubeLine = new CubicCurve2D.Double();
+            Point cp1 = midPoint(temp.getInicio(), midPoint(temp.getInicio(),temp.getFin()));
+            Point cp2 = midPoint(midPoint(temp.getInicio(),temp.getFin()), temp.getFin());
+            cp1 = getPerpendicularPoint(temp.getInicio(), cp1, 75);
+            cp2 = getPerpendicularPoint(temp.getFin(),cp2,75);
+            cp2.translate(0,0);
+            cubeLine.setCurve(temp.getInicio(), cp1, cp2, temp.getFin());
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.draw(cubeLine);
+            //g.drawLine(temp.getInicio().x, temp.getInicio().y
+            //         , temp.getFin().x, temp.getFin().y);
+            i++;
         }
     }
 
@@ -99,6 +126,24 @@ public class PanelGrafo extends javax.swing.JPanel {
 
     public BufferedImage getBackgroundImage() {
         return background;
+    }
+    
+    public Point midPoint(Point a, Point b){
+        return new Point(((a.x+b.x)/2),((a.y+b.y)/2));
+    }
+    public Point getPerpendicularPoint(Point A, Point B, int move){
+        double m = 1.0 * (A.y - B.y) / (A.x - B.x);
+        double b = 1.0*B.y - m * B.x;
+        m = -1/m;
+        int x,y;
+        if(move > 0){
+            x = (int) (B.x - Math.sqrt((Math.pow(move, 2))/(m+1)));
+            y = (int) (B.y - m*(B.x-x));
+        }else{
+            x = (int) (Math.sqrt((Math.pow(move, 2))/(m+1)) - B.x);
+            y = (int) ( - B.y + m*(B.x-x));
+        }
+        return new Point(x, y);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
