@@ -47,6 +47,6 @@ public class Relaciones {
     
     @Override
     public String toString() {
-        return tipo;
+        return a1 +" relacion de " + tipo + " con " + a2;
     }
 }

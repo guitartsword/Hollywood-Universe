@@ -59,7 +59,7 @@ public class PanelGrafo extends javax.swing.JPanel {
         super.paintComponent(g);
         int i =0;
         for (Line temp : lines) {
-            switch(i%4){
+            switch(i%5){
                 case 0:
                     g.setColor(Color.BLACK);
                     break;
@@ -72,8 +72,11 @@ public class PanelGrafo extends javax.swing.JPanel {
                 case 3:
                     g.setColor(Color.BLUE);
                     break;
+                case 4:
+                    g.setColor(Color.MAGENTA);
+                    break;
             }
-            CubicCurve2D cubeLine = new CubicCurve2D.Double();
+            /*CubicCurve2D cubeLine = new CubicCurve2D.Double();
             Point cp1 = midPoint(temp.getInicio(), midPoint(temp.getInicio(),temp.getFin()));
             Point cp2 = midPoint(midPoint(temp.getInicio(),temp.getFin()), temp.getFin());
             cp1 = getPerpendicularPoint(temp.getInicio(), cp1, 75);
@@ -81,9 +84,9 @@ public class PanelGrafo extends javax.swing.JPanel {
             cp2.translate(0,0);
             cubeLine.setCurve(temp.getInicio(), cp1, cp2, temp.getFin());
             Graphics2D g2d = (Graphics2D) g;
-            g2d.draw(cubeLine);
-            //g.drawLine(temp.getInicio().x, temp.getInicio().y
-            //         , temp.getFin().x, temp.getFin().y);
+            g2d.draw(cubeLine);*/
+            g.drawLine(temp.getInicio().x, temp.getInicio().y
+                     , temp.getFin().x, temp.getFin().y);
             i++;
         }
     }

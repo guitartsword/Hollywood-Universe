@@ -158,13 +158,16 @@ public class GUI extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        rcb = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        list_relaciones = new javax.swing.JList();
         jButton6 = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         cb2 = new javax.swing.JComboBox();
         jLabel26 = new javax.swing.JLabel();
         cb = new javax.swing.JComboBox();
+        jButton8 = new javax.swing.JButton();
+        rcb = new javax.swing.JComboBox();
+        jLabel23 = new javax.swing.JLabel();
         menu = new javax.swing.JPanel();
         b_ingresar = new javax.swing.JButton();
         scrollGraph = new javax.swing.JScrollPane();
@@ -528,7 +531,7 @@ public class GUI extends javax.swing.JFrame {
         });
         ClickNodo.add(agregarNodo);
 
-        agregarRelacion.setText("Agregar Relacion");
+        agregarRelacion.setText("Agregar/Elminar Relacion");
         agregarRelacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarRelacionActionPerformed(evt);
@@ -591,7 +594,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gear.gif"))); // NOI18N
         jPanel8.add(jLabel15);
-        jLabel15.setBounds(-110, -20, 320, 310);
+        jLabel15.setBounds(-110, 60, 320, 310);
 
         jPanel9.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -601,33 +604,28 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(153, 255, 153));
 
-        jLabel23.setFont(new java.awt.Font("Impact", 0, 26)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Relacion");
-
-        rcb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FAMILIA", "MATRIMONIO", "AMISTAD", "NOVIAZGO" }));
+        list_relaciones.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(list_relaciones);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(rcb, 0, 310, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rcb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jButton6.setBackground(new java.awt.Color(255, 255, 255));
@@ -653,29 +651,57 @@ public class GUI extends javax.swing.JFrame {
 
         cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jButton8.setBackground(new java.awt.Color(255, 255, 255));
+        jButton8.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(102, 153, 255));
+        jButton8.setText("ELIMINAR RELACION");
+        jButton8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        rcb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FAMILIA", "MATRIMONIO", "AMISTAD", "NOVIAZGO" }));
+
+        jLabel23.setFont(new java.awt.Font("Impact", 0, 26)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Relacion");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel9Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel17)
-                            .addGap(179, 179, 179))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(179, 179, 179))
+                            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel26)
+                                .addComponent(cb, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel25))))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addComponent(cb, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cb2, 0, 302, Short.MAX_VALUE)
+                            .addComponent(rcb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -691,17 +717,23 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rcb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel8.add(jPanel9);
-        jPanel9.setBounds(210, 10, 690, 320);
+        jPanel9.setBounds(210, 10, 690, 390);
 
         javax.swing.GroupLayout vrelacionLayout = new javax.swing.GroupLayout(vrelacion.getContentPane());
         vrelacion.getContentPane().setLayout(vrelacionLayout);
@@ -716,8 +748,8 @@ public class GUI extends javax.swing.JFrame {
             vrelacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vrelacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -808,6 +840,7 @@ public class GUI extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Cargar ");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -816,6 +849,7 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        Historial.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         Historial.setText("Historial");
         Historial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -950,6 +984,12 @@ public class GUI extends javax.swing.JFrame {
         cb.setSelectedIndex(0);
         cb2.setSelectedIndex(0);
         rcb.setSelectedIndex(0);
+        DefaultListModel<Relaciones> listModel = new DefaultListModel();
+        for(Relaciones temp: universo.getEdges()){
+            listModel.addElement(temp);
+        }
+        list_relaciones.setModel(listModel);
+        dibujarGrafo();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void agregarRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarRelacionActionPerformed
@@ -966,6 +1006,11 @@ public class GUI extends javax.swing.JFrame {
             vrelacion.setAlwaysOnTop(true);
             vrelacion.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             vrelacion.setLocationRelativeTo(this);
+            DefaultListModel<Relaciones> listModel = new DefaultListModel();
+            for(Relaciones temp: universo.getEdges()){
+                listModel.addElement(temp);
+            }
+            list_relaciones.setModel(listModel);
             vrelacion.setVisible(true);
         }
     }//GEN-LAST:event_agregarRelacionActionPerformed
@@ -988,9 +1033,22 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         universo.removeVertex(SelectedNode.getActor());
-        menu1.remove(SelectedNode);
+        historial.push("Se elimno el actor " + SelectedNode.getActor().getNombreCompleto());
+        vmodificar.setVisible(false);
         dibujarGrafo();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Relaciones eliminar = (Relaciones)list_relaciones.getSelectedValue();
+        universo.removeEdge(eliminar);
+        DefaultListModel<Relaciones> listModel = new DefaultListModel();
+        for(Relaciones temp: universo.getEdges()){
+            listModel.addElement(temp);
+        }
+        list_relaciones.setModel(listModel);
+        dibujarGrafo();
+        historial.add("Se elimno la relacion: " + eliminar);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1033,11 +1091,13 @@ public class GUI extends javax.swing.JFrame {
 
     public File cargar() {
         try {
+            universo = new SparseMultigraph<>();
             this.setAlwaysOnTop(false);
             JFileChooser jfc = new JFileChooser();
             FileFilter filtro = new FileNameExtensionFilter("Hollywood", "txt");
             jfc.setFileFilter(filtro);
             File archivo = null;
+            jfc.setCurrentDirectory(new File("./"));
             int op = jfc.showOpenDialog(null);
             if (op == JFileChooser.APPROVE_OPTION) {
                 archivo = jfc.getSelectedFile();
@@ -1340,6 +1400,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1377,6 +1438,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList list_relaciones;
     private javax.swing.JList lista_Particiapdo;
     private javax.swing.JLabel lreporte;
     private javax.swing.JPanel menu;
