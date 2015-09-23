@@ -6,8 +6,10 @@
 package KevinBacon;
 
 //import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.visualization.VisualizationImageServer;
 //import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -29,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -86,6 +89,7 @@ public class GUI extends javax.swing.JFrame {
         Image nodoImg = ImageIO.read(new File("./src/Imagenes/star.png"));
         nodo = new BufferedImage(30, 30, BufferedImage.TYPE_4BYTE_ABGR);
         nodo.getGraphics().drawImage(nodoImg.getScaledInstance(30, 30, 0), 0, 0, null);
+        dibujarGrafo();
     }
 
     /**
@@ -122,19 +126,18 @@ public class GUI extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        tefi_actorNombreMod = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        tefi_actorNacionalidadMod = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lista_Particiapdo = new javax.swing.JList();
         jButton5 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        sp_actorEdadMod = new javax.swing.JSpinner();
         ClickNodo = new javax.swing.JPopupMenu();
         agregarNodo = new javax.swing.JMenuItem();
         agregarRelacion = new javax.swing.JMenuItem();
@@ -378,12 +381,12 @@ public class GUI extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Peliculas");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        lista_Particiapdo.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lista_Particiapdo);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -418,61 +421,50 @@ public class GUI extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Nombre Completo");
 
+        sp_actorEdadMod.setModel(new javax.swing.SpinnerNumberModel(0, 0, 130, 1));
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel13)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                .addComponent(jTextField7)
-                                .addComponent(jTextField9))
-                            .addComponent(jLabel12)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel18)))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13)
+                    .addComponent(tefi_actorNombreMod)
+                    .addComponent(tefi_actorNacionalidadMod, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel18)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(sp_actorEdadMod))
+                .addGap(33, 33, 33)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18)
-                .addGap(9, 9, 9)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel18)
+                        .addGap(9, 9, 9)
+                        .addComponent(tefi_actorNombreMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sp_actorEdadMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tefi_actorNacionalidadMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jPanel4.add(jPanel5);
@@ -804,6 +796,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         leer(cargar());
+        dibujarGrafo();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -819,12 +812,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1MousePressed
 
     private void menu1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseDragged
-        if (evt.getButton() == 0) {
-            JViewport viewPort = scrollGraph.getViewport();
-            Point vpp = viewPort.getViewPosition();
-            vpp.translate(MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
-            menu1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
-        }
+        JViewport viewPort = scrollGraph.getViewport();
+        Point vpp = viewPort.getViewPosition();
+        vpp.translate(MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
+        menu1.scrollRectToVisible(new Rectangle(vpp, viewPort.getSize()));
+        System.out.printf("dx = %d; dy = %d;\n",MouseStart.x - evt.getX(), MouseStart.y - evt.getY());
     }//GEN-LAST:event_menu1MouseDragged
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
@@ -1090,7 +1082,6 @@ public class GUI extends javax.swing.JFrame {
                     universo.addEdge(new Relaciones(relacion, temp1.getNombreCompleto(), temp2.getNombreCompleto()), temp1, temp2);
                 }
             }
-            dibujarGrafo();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al crear el grafo", "ERROR", 2);
@@ -1098,7 +1089,77 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void dibujarGrafo() {
-
+        Point Center = new Point(menu1.getWidth()/2,menu1.getHeight()/2);
+        int change = 100;
+        int cont=0;
+        boolean diagonal = true;
+        for(Actor vertex:universo.getVertices()){
+            NodeButton bu = new NodeButton(vertex);
+            bu.setContentAreaFilled(false);
+            bu.setIcon(new ImageIcon(nodo));
+            bu.setSize(nodo.getWidth(), nodo.getHeight());
+            if(cont == 0){
+                
+                bu.setLocation(Center);
+            }else{
+                if(diagonal){
+                    switch(cont%4){
+                        case 0:
+                            bu.setLocation(Center.x+change,Center.y-change);
+                            change += 150;
+                            diagonal = !diagonal;
+                            break;
+                        case 1:
+                            bu.setLocation(Center.x+change,Center.y+change);
+                            break;
+                        case 2:
+                            bu.setLocation(Center.x-change,Center.y+change);
+                            break;
+                        case 3:
+                            bu.setLocation(Center.x-change,Center.y-change);
+                            break;
+                    }
+                }else{
+                    switch(cont%4){
+                        case 0:
+                            bu.setLocation(Center.x,Center.y-change);
+                            change += 150;
+                            diagonal = !diagonal;
+                            break;
+                        case 1:
+                            bu.setLocation(Center.x+change,Center.y);
+                            break;
+                        case 2:
+                            bu.setLocation(Center.x,Center.y+change);
+                            break;
+                        case 3:
+                            bu.setLocation(Center.x-change,Center.y);
+                            break;
+                    }
+                }
+            }
+            bu.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    tefi_actorNombreMod.setText(bu.getActor().getNombreCompleto());
+                    tefi_actorNacionalidadMod.setText(bu.getActor().getNacionalidad());
+                    sp_actorEdadMod.setValue(bu.getActor().getEdad());
+                    DefaultListModel<Pelicula> lista = new DefaultListModel();
+                    for(Pelicula temp:bu.getActor().getParticapado()){
+                        lista.addElement(temp);
+                    }
+                    lista_Particiapdo.setModel(lista);
+                    vmodificar.pack();
+                    vmodificar.setLocationRelativeTo(null);
+                    vagregar.setAlwaysOnTop(true);
+                    vagregar.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+                    vmodificar.setVisible(true);
+                }
+            });
+            menu1.add(bu);
+            menu1.repaint();
+            cont++;
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu ClickNodo;
@@ -1113,7 +1174,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1135,7 +1195,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -1151,18 +1210,19 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JList lista_Particiapdo;
     private javax.swing.JLabel lreporte;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menu1;
     private javax.swing.JComboBox rcb;
     private javax.swing.JScrollPane scrollGraph;
     private javax.swing.JSpinner sp_actorEdad;
+    private javax.swing.JSpinner sp_actorEdadMod;
     private javax.swing.JSpinner sp_peliculaAño;
     private javax.swing.JTextField tefi_actorNacionalidad;
+    private javax.swing.JTextField tefi_actorNacionalidadMod;
     private javax.swing.JTextField tefi_actorNombre;
+    private javax.swing.JTextField tefi_actorNombreMod;
     private javax.swing.JTextField tefi_peliculaNombre;
     private javax.swing.JTextField tefi_peliculaStudio;
     private javax.swing.JDialog vagregar;

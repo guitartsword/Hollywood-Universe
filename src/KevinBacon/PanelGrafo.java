@@ -88,7 +88,7 @@ public class PanelGrafo extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(background != null) {
+        /*if(background != null) {
             g.drawImage(background, 0, 0, this);
         }
         /*
