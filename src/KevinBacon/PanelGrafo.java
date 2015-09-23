@@ -9,9 +9,13 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
+import javax.swing.Icon;
+import javax.swing.JButton;
 
 /**
  *
@@ -75,7 +79,9 @@ public class PanelGrafo extends javax.swing.JPanel {
             
         }
     }
-    
+    public BufferedImage getBackgroundImage(){
+        return background;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
