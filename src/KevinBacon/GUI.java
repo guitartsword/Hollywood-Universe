@@ -5,9 +5,12 @@
  */
 package KevinBacon;
 
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
+import edu.uci.ics.jung.visualization.VisualizationImageServer;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -801,13 +804,15 @@ public class GUI extends javax.swing.JFrame {
                     g.addEdge(new Relaciones(relacion, temp1.getNombreCompleto(), temp2.getNombreCompleto()), temp1, temp2);
                 }
             }
+            dibujarGrafo();
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al crear el grafo", "ERROR", 2);
-
         }
     }
-
+    private void dibujarGrafo() {
+         
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu ClickNodo;
     private javax.swing.JLabel Fondo;
