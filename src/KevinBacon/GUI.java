@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.logging.Level;
@@ -72,7 +73,7 @@ public class GUI extends javax.swing.JFrame {
         //menu1.setOpaque(false);
         ((PanelGrafo) menu1).setTransparentImage();
         menu.setLocation((x / 2) - 150, y / 5);
-        
+
         //
         scrollGraph.setVisible(false);
         g = new SparseMultigraph<>();
@@ -593,7 +594,7 @@ public class GUI extends javax.swing.JFrame {
         if (evt.isMetaDown()) {
             ClickNodo.show(evt.getComponent(), evt.getX(), evt.getY());
         }
-        
+
         MouseStart = evt.getPoint();
     }//GEN-LAST:event_menu1MousePressed
 
@@ -607,28 +608,38 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1MouseDragged
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
-        vagregar.setLocationRelativeTo(this);
+        peliculas = new ArrayList();
         vagregar.pack();
         vagregar.setAlwaysOnTop(true);
         vagregar.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        vagregar.setLocationRelativeTo(this);
         vagregar.setVisible(true);
-        
+
     }//GEN-LAST:event_agregarNodoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try{
-            g.addVertex(new Actor(tefi_actorNombre.getText(), Integer.parseInt(sp_actorEdad.getModel().getValue().toString()), tefi_actorNacionalidad.getText()));
+        try {
+            Actor temporal = new Actor(tefi_actorNombre.getText(), Integer.parseInt(sp_actorEdad.getModel().getValue().toString()), tefi_actorNacionalidad.getText());
+            temporal.setParticapado(peliculas);
+            g.addVertex(temporal);
             historial.push("Se agrego el actor " + tefi_actorNombre.getText());
             tefi_actorNombre.setText(null);
             sp_actorEdad.setValue(0);
             tefi_actorNacionalidad.setText(null);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Revise el valor de la edad");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
+        String nombre = tefi_peliculaNombre.getText();
+        int año = (int) sp_peliculaAño.getValue();
+        String studio = tefi_peliculaStudio.getText();
+        peliculas.add(new Pelicula(nombre, año, studio));
+        tefi_peliculaNombre.setText("");
+        sp_peliculaAño.setValue(2015);
+        tefi_peliculaStudio.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -868,4 +879,5 @@ public class GUI extends javax.swing.JFrame {
     int y;
     Graph<Actor, Relaciones> g;
     Stack historial;
+    ArrayList<Pelicula> peliculas;
 }
