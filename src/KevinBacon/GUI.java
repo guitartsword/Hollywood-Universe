@@ -605,6 +605,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1MouseDragged
 
     private void agregarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNodoActionPerformed
+        peliculas = new ArrayList();
         vagregar.setLocationRelativeTo(this);
         vagregar.pack();
         vagregar.setAlwaysOnTop(true);
@@ -628,7 +629,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        peliculas = new ArrayList();
+        
         String nombre = tefi_peliculaNombre.getText();
         int año = (int) sp_peliculaAño.getValue();
         String studio = tefi_peliculaStudio.getText();
